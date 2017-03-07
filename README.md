@@ -1,5 +1,8 @@
-# lunardays
+lunardays
+========
+
 JavaScript library for calculating moon days for specific date using latitude and longitude.
+
 Created for [Moon Organizer](https://moonorganizer.com/).
 
 ## Usage example :
