@@ -1,6 +1,6 @@
 {
   "name": "lunardays",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JavaScript library for calculating moon days for specific date using latitude and longitude.",
   "author" : "g00dv1n",
   "homepage": "https://github.com/g00dv1n/lunardays",
