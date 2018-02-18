@@ -13,8 +13,16 @@ const daysRange = (startDate, numberOfDays) => {
 }
 
 const recentNewMoon = (date) => {
-  let recent_phases = lune.phase_hunt(moment(date).toDate())
-  let newMoon = moment(recent_phases.new_date)
+  let endOfDate = moment(date).endOf('day').toDate()
+  let startOfDate = moment(date).startOf('day').toDate()
+
+  let recentPhases = lune.phase_hunt(endOfDate)
+
+  if (recentPhases.new_date > endOfDate) {
+    recentPhases = lune.phase_hunt(startOfDate)
+  }
+
+  let newMoon = moment(recentPhases.new_date)
   return newMoon
 }
 
@@ -35,7 +43,7 @@ const lunarDays = (date, latitude, longitude) => {
   let diffDays = daysBetween(newMoon, date)
   let initDate = moment(newMoon).startOf('day')
 
-  // WE NEED CALCULATE CURRENT DAY + 1 for all moon days
+  // WE NEED CALCULATE CURRENT DAY + 2 for all moon days
   let days = daysRange(initDate, diffDays + 4)
 
   // check if first rist before new moon delete IT
@@ -60,9 +68,16 @@ const lunarDays = (date, latitude, longitude) => {
   }
   let res = _.filter(moonDays, ({start, end}) => isDayBetween(start, end, date))
   return res
-
 }
 
+const latitude = 50
+const longitude = 30
+
+let date = moment('15-04-2018', 'DD-MM-YYYY')
+
+let res = lunarDays(date, latitude, longitude)
+
+console.log(res)
 
 module.exports = lunarDays
 
